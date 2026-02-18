@@ -1,0 +1,11 @@
+# OS
+.DS_Store
+
+# Data files (too large for git)
+input/
+output/
+
+# R session
+.Rhistory
+.RData
+.Rproj.user/
