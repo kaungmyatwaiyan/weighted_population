@@ -31,9 +31,9 @@ The need index is published annually per financial year. This project joins it w
 R/
   extract_need_index.R   # Hardcoded extraction functions (one per Excel file)
   get_need_index.R       # Combines all extractions into one dataset
-  join_weighted_pop.R    # Joins need index with monthly registered population
+  join_weighted_pop.R    # Join, normalise, and test weighted population
 run_extract.R            # Extracts and exports to output/
-load_need_index.R        # Loads need index into environment for interactive use
+run_weighted_pop.R       # Loads need index into environment for interactive use
 input/                   # Excel files (not tracked in git)
 output/                  # CSV/RDS exports (not tracked in git)
 ```
@@ -46,12 +46,22 @@ output/                  # CSV/RDS exports (not tracked in git)
 source("run_extract.R")
 ```
 
-### Interactive: load and join
+### Interactive: load, join, and normalise
 
 ```r
-source("load_need_index.R")
+source("run_weighted_pop.R")
 result <- join_weighted_pop(reg_pop_df, ni)
+result <- calc_normalised_wp(result)
+test_normalised_wp(result)
 ```
+
+### Normalised Weighted Population
+
+```
+Normalised_Weighted_Pop = (Weighted_Pop / Total_Weighted_Pop) × Total_Registered_Pop
+```
+
+Grouped by `Org_Type` + `Effective_Snapshot_Date`. This redistributes the actual registered population according to relative need, so that the total normalised weighted population equals the total registered population within each group.
 
 ## Output Schema
 
