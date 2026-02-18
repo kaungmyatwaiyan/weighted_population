@@ -1,19 +1,29 @@
 # Weighted Population Need Index
 
-Extract annual need index from NHS weighted population Excel files and join with monthly registered population data to calculate monthly weighted populations.
+Extract the **overall need index** from the [NHS England Allocations](https://www.england.nhs.uk/allocations/) weighted population spreadsheets and join with monthly registered population data to calculate monthly weighted populations at GP practice, ICB, and Commissioning Region level.
+
+## Background
+
+NHS England publishes allocation formulae that distribute funding based on relative need. The **weighted population** adjusts raw registered populations by a **need index** that reflects differences in healthcare need across areas. This need index combines components for general & acute, community services, mental health, maternity, prescribing, and health inequalities.
+
+This project extracts the overall need index from the **"J – Overall weighted populations"** supporting spreadsheets, available on the [NHS England Allocations page](https://www.england.nhs.uk/allocations/).
+
+## Input Files
+
+Download the **"J – Overall weighted populations by ICB and GP practice"** spreadsheets from the allocations page for each period and place them in the `input/` directory:
+
+| File | Source |
+|------|--------|
+| `j-overall-weighted-populations-22-23.xlsx` | 2022-23 allocations |
+| `j-overall-weighted-populations-2023-24-v1.xlsx` | 2023-24 to 2024-25 allocations |
+| `J--overall-weighted-populations-2025-to-2026.xlsx` | 2025-26 allocations |
+| `j-overall-weighted-populations-2627-to-2829-v3.xlsx` | 2026-27 to 2028-29 allocations |
 
 ## Method
 
-1. **Annual Need Index** = Weighted Population ÷ Registered Population (from Excel files)
-2. **Monthly Weighted Population** = Monthly Registered Population × Annual Need Index
+**Monthly Weighted Population = Monthly Registered Population × Need Index**
 
-## Data Coverage
-
-| | 2022-23 | 2023-24 | 2024-25 | 2025-26 | 2026-27 | 2027-28 | 2028-29 |
-|---|---|---|---|---|---|---|---|
-| Comm Region | 7 | 7 | 7 | 7 | 7 | 7 | 7 |
-| ICB | 42 | 42 | 42 | 42 | 36 | 36 | 36 |
-| GP | 6,554 | 6,553 | 6,553 | 6,348 | 6,281 | 6,281 | 6,281 |
+The need index is published annually per financial year. This project joins it with monthly registered population snapshots so that each month's weighted population reflects both the latest list size and the annual need adjustment.
 
 ## Files
 
