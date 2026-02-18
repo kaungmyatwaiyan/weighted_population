@@ -33,7 +33,7 @@ R/
   get_need_index.R       # Combines all extractions into one dataset
   join_weighted_pop.R    # Join, normalise, and test weighted population
 run_extract.R            # Extracts and exports to output/
-run_weighted_pop.R       # Loads need index into environment for interactive use
+run_weighted_pop.R       # Full pipeline: extract, join, normalise, and validate
 input/                   # Excel files (not tracked in git)
 output/                  # CSV/RDS exports (not tracked in git)
 ```
@@ -46,13 +46,12 @@ output/                  # CSV/RDS exports (not tracked in git)
 source("run_extract.R")
 ```
 
-### Interactive: load, join, and normalise
+### Full pipeline (requires `reg_pop_df` in environment)
 
 ```r
 source("run_weighted_pop.R")
-result <- join_weighted_pop(reg_pop_df, ni)
-result <- calc_normalised_wp(result)
-test_normalised_wp(result)
+# -> extracts need index, joins with reg_pop_df, normalises, and validates
+# -> result is in your environment
 ```
 
 ### Normalised Weighted Population
